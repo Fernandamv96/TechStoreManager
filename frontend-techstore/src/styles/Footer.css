@@ -1,0 +1,55 @@
+/* ============================================
+   Footer.css — Minimal dark footer
+   ============================================ */
+
+.footer {
+  position: relative;
+  z-index: 1;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.footer-brand .logo-mini {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: var(--grad-primary);
+}
+
+.footer-meta {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.footer-meta strong {
+  color: var(--text-soft);
+  font-weight: 500;
+}
+
+.footer-asignatura {
+  font-size: 0.75rem;
+  color: var(--text-faint);
+  letter-spacing: 0.02em;
+}
