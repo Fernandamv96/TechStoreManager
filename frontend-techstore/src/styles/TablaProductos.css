@@ -1,0 +1,423 @@
+/* ============================================
+   TablaProductos.css — Modern dark table
+   ============================================ */
+
+.tabla-wrapper {
+  width: 100%;
+}
+
+.tabla-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.tabla-filtros {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.buscar-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 200px;
+  max-width: 320px;
+}
+
+.buscar-wrap .lupa {
+  position: absolute;
+  left: 0.85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+  width: 16px;
+  height: 16px;
+}
+
+.buscar-wrap input {
+  padding-left: 2.4rem;
+}
+
+.buscar-wrap .limpiar {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  font-size: 1.1rem;
+  line-height: 1;
+  transition: color var(--t-fast), background var(--t-fast);
+}
+
+.buscar-wrap .limpiar:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-50%);
+}
+
+.tabla-contenedor {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.tabla-productos {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 720px;
+}
+
+.tabla-productos thead {
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid var(--border);
+}
+
+.tabla-productos th {
+  text-align: left;
+  padding: 0.85rem 1rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  white-space: nowrap;
+  user-select: none;
+  position: relative;
+}
+
+.tabla-productos th.sortable {
+  cursor: pointer;
+  transition: color var(--t-fast);
+}
+
+.tabla-productos th.sortable:hover {
+  color: var(--text-soft);
+}
+
+.tabla-productos th.sortable .sort-icon {
+  display: inline-block;
+  margin-left: 0.3rem;
+  opacity: 0.4;
+  font-size: 0.8rem;
+  transition: opacity var(--t), color var(--t);
+}
+
+.tabla-productos th.sortable.active {
+  color: var(--text);
+}
+
+.tabla-productos th.sortable.active .sort-icon {
+  opacity: 1;
+  color: var(--accent-cyan);
+}
+
+.tabla-productos td {
+  padding: 0.95rem 1rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.93rem;
+  color: var(--text);
+  vertical-align: middle;
+}
+
+.fila-producto {
+  transition: background var(--t);
+  position: relative;
+}
+
+.fila-producto:hover {
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.fila-producto:last-child td {
+  border-bottom: none;
+}
+
+.fila-producto td:first-child {
+  position: relative;
+}
+
+.fila-producto:hover td:first-child::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--grad-primary);
+}
+
+.id-cell {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.nombre-cell {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.precio-cell {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  color: var(--text);
+}
+
+/* Chip de categoría */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.76rem;
+  font-weight: 500;
+  background: var(--surface-strong);
+  color: var(--text-soft);
+  border: 1px solid var(--border);
+}
+
+.chip::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent-purple);
+}
+
+/* Stock badges */
+.stock-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.55rem;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  min-width: 36px;
+  justify-content: center;
+}
+
+.stock-ok {
+  background: rgba(34, 197, 94, 0.12);
+  color: var(--accent-green);
+  border: 1px solid rgba(34, 197, 94, 0.25);
+}
+.stock-bajo {
+  background: rgba(251, 191, 36, 0.12);
+  color: var(--accent-amber);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+}
+.stock-agotado {
+  background: rgba(244, 63, 94, 0.12);
+  color: var(--accent-red);
+  border: 1px solid rgba(244, 63, 94, 0.3);
+}
+
+/* Acciones */
+.acciones-tabla {
+  display: flex;
+  gap: 0.4rem;
+  justify-content: flex-end;
+}
+
+.acciones-tabla button {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border-radius: 9px;
+  display: grid;
+  place-items: center;
+  transition: all var(--t-fast);
+}
+
+.acciones-tabla button svg {
+  width: 15px;
+  height: 15px;
+}
+
+.btn-icon-edit {
+  background: rgba(0, 229, 255, 0.1);
+  color: var(--accent-cyan);
+  border: 1px solid rgba(0, 229, 255, 0.2);
+}
+.btn-icon-edit:hover {
+  background: rgba(0, 229, 255, 0.2);
+  border-color: rgba(0, 229, 255, 0.4);
+  box-shadow: 0 0 16px rgba(0, 229, 255, 0.3);
+}
+
+.btn-icon-delete {
+  background: rgba(244, 63, 94, 0.1);
+  color: var(--accent-red);
+  border: 1px solid rgba(244, 63, 94, 0.2);
+}
+.btn-icon-delete:hover {
+  background: rgba(244, 63, 94, 0.2);
+  border-color: rgba(244, 63, 94, 0.4);
+  box-shadow: 0 0 16px rgba(244, 63, 94, 0.3);
+}
+
+/* Estado vacío */
+.tabla-vacia {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  color: var(--text-muted);
+  background: rgba(0, 0, 0, 0.15);
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+}
+
+.tabla-vacia-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+  opacity: 0.5;
+}
+
+.tabla-vacia h3 {
+  color: var(--text-soft);
+  font-size: 1.05rem;
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+}
+
+.tabla-vacia p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+/* Skeleton */
+.skeleton-row td {
+  padding: 0.95rem 1rem;
+}
+
+.skeleton {
+  height: 14px;
+  border-radius: 6px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.04) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.04) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+.skeleton.id {
+  width: 35px;
+}
+.skeleton.nombre {
+  width: 70%;
+}
+.skeleton.chip {
+  width: 90px;
+  height: 22px;
+  border-radius: 999px;
+}
+.skeleton.precio {
+  width: 80px;
+}
+.skeleton.stock {
+  width: 36px;
+  height: 22px;
+  border-radius: 8px;
+}
+
+/* Tabla footer (contador) */
+.tabla-footer {
+  margin-top: 1rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.tabla-footer strong {
+  color: var(--text-soft);
+  font-weight: 600;
+}
+
+/* Responsive: tabla → tarjetas */
+@media (max-width: 700px) {
+  .tabla-productos thead {
+    display: none;
+  }
+
+  .tabla-productos,
+  .tabla-productos tbody,
+  .tabla-productos tr,
+  .tabla-productos td {
+    display: block;
+    width: 100%;
+  }
+
+  .tabla-productos {
+    min-width: 0;
+    border: none;
+  }
+
+  .tabla-productos tbody {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .fila-producto {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0.5rem 0.75rem;
+  }
+
+  .tabla-productos td {
+    border: none;
+    padding: 0.4rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .tabla-productos td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .tabla-productos td[data-label="Acciones"] {
+    justify-content: flex-end;
+    margin-top: 0.5rem;
+    border-top: 1px solid var(--border);
+    padding-top: 0.75rem;
+  }
+
+  .fila-producto:hover td:first-child::before {
+    display: none;
+  }
+}
