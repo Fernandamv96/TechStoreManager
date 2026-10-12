@@ -59,8 +59,9 @@ function App() {
   // ============== Carga de datos ==============
   useEffect(() => {
     cargarProductos();
+    const timeouts = timeoutsRef.current; // mismo objeto que se va mutando
     return () => {
-      Object.values(timeoutsRef.current).forEach(clearTimeout);
+      Object.values(timeouts).forEach(clearTimeout);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
