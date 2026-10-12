@@ -1,5 +1,12 @@
 # TechStore Manager — Evaluación Sumativa 4
 
+[![CI](https://github.com/Fernandamv96/TechStoreManager/actions/workflows/ci.yml/badge.svg)](https://github.com/Fernandamv96/TechStoreManager/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-BD93F9)](LICENSE)
+
+**Demo:** <https://techstore-api-one.vercel.app>
+
+![Panel de TechStore Manager con métricas de inventario](docs/preview.png)
+
 Sistema **Full Stack** para administrar el inventario de productos de la
 empresa **TechStore SPA**, desarrollado como parte de la **Evaluación
 Sumativa 4** de la asignatura *Programación Front End* (TI 3031).
@@ -259,6 +266,26 @@ Cada request imprime por consola:
 - [x] Buscar por id (incluido en búsqueda en vivo)
 
 ---
+
+## 🔒 Seguridad y calidad
+
+- CORS restringible con `FRONTEND_URL` (ver `backend-techstore/.env.example`); sin cabecera `X-Powered-By`.
+- Los errores no exponen detalles internos en producción.
+- Tests de la API con `node:test` (CRUD, validaciones, JSON malformado) y CI con lint y build del frontend.
+- CodeQL, Dependabot y gitleaks (pre-commit). Para reportar vulnerabilidades, mira [SECURITY.md](SECURITY.md).
+
+Tests del backend: `cd backend-techstore && npm test`
+
+## 💡 Qué aprendí
+
+- A separar un backend Express en rutas, controladores y middleware, con validación en el servidor como fuente de verdad.
+- A consumir la API desde React con una capa de servicios (Axios) y manejo de errores legible.
+- A desplegar frontend y API juntos en Vercel con rewrites hacia una función serverless.
+- Que un manejador de errores no debe devolver `err.message` al cliente en producción.
+
+## 📄 Licencia
+
+[MIT](LICENSE) © 2026 Fernanda (Fernandamv96)
 
 ## 👩‍🎓 Autor
 
