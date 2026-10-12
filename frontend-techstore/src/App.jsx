@@ -11,7 +11,8 @@ import {
   listarProductos,
   crearProducto,
   actualizarProducto,
-  eliminarProducto
+  eliminarProducto,
+  API_BASE
 } from "./services/api.js";
 
 import "./styles/App.css";
@@ -158,7 +159,7 @@ function App() {
       <header className="hero">
         <div className="hero-badge">
           <span className="dot" />
-          <span>API conectada · http://localhost:3000</span>
+          <span>API conectada · {API_BASE || window.location.origin}</span>
         </div>
         <h1 className="hero-title">
           <span className="gradient-text">TechStore</span> Manager

@@ -14,7 +14,7 @@ import axios from "axios";
 
 // Base del backend. Si no hay VITE_API_URL: en local cae a
 // localhost:3000 y en producción usa el mismo dominio.
-const API_BASE =
+export const API_BASE =
   import.meta.env.VITE_API_URL ||
   (import.meta.env.DEV ? "http://localhost:3000" : "");
 
