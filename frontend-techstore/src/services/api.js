@@ -7,13 +7,16 @@
 //    - En Vercel: setear VITE_API_URL en Environment Variables
 //      (ej: https://techstore-api.vercel.app)
 //    - En local : usa http://localhost:3000 por defecto
+//    - Proyecto full stack (raíz del repo): mismo dominio
 // =====================================================
 
 import axios from "axios";
 
-// Base del backend. Si no hay VITE_API_URL, cae a localhost.
+// Base del backend. Si no hay VITE_API_URL: en local cae a
+// localhost:3000 y en producción usa el mismo dominio.
 const API_BASE =
-  import.meta.env.VITE_API_URL || "http://localhost:3000";
+  import.meta.env.VITE_API_URL ||
+  (import.meta.env.DEV ? "http://localhost:3000" : "");
 
 const cliente = axios.create({
   baseURL: `${API_BASE}/productos`,
@@ -30,7 +33,7 @@ function normalizarError(err) {
     return err.response.data.mensaje;
   }
   if (err.code === "ERR_NETWORK") {
-    return `No se pudo conectar con el servidor (${API_BASE}). Verifica que el backend esté en línea.`;
+    return `No se pudo conectar con el servidor (${API_BASE || window.location.origin}). Verifica que el backend esté en línea.`;
   }
   return err.message || "Error desconocido";
 }

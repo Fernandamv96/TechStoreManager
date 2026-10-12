@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "npm install --prefix backend-techstore && npm install --prefix frontend-techstore",
+  "buildCommand": "npm run build --prefix frontend-techstore",
+  "outputDirectory": "frontend-techstore/dist",
+  "rewrites": [
+    { "source": "/productos", "destination": "/api" },
+    { "source": "/productos/:path*", "destination": "/api" }
+  ]
+}
