@@ -14,14 +14,15 @@ const productosRoutes = require("./routes/productos.routes.js");
 const app = express();
 
 // ---------- CORS ----------
-// Dev: abierto a todos. Prod: recomendamos restringir al dominio del
-// frontend pasando FRONTEND_URL como env var en Vercel.
-//   const allowedOrigins = (process.env.FRONTEND_URL || "")
-//     .split(",")
-//     .map(s => s.trim())
-//     .filter(Boolean);
-//   app.use(cors({ origin: allowedOrigins.length ? allowedOrigins : true }));
-app.use(cors());
+// Si FRONTEND_URL está definida (una o varias URLs separadas por coma),
+// solo esos orígenes pueden llamar a la API. Si no, se permite cualquiera
+// (cómodo en desarrollo; en producción conviene definir FRONTEND_URL).
+const allowedOrigins = (process.env.FRONTEND_URL || "")
+  .split(",")
+  .map(s => s.trim())
+  .filter(Boolean);
+app.use(cors({ origin: allowedOrigins.length ? allowedOrigins : true }));
+app.disable("x-powered-by");
 
 // ---------- Middlewares globales ----------
 app.use(express.json());    // Parseo de body en JSON
@@ -53,15 +54,17 @@ app.use((req, res) => {
 // ---------- Manejo global de errores ----------
 app.use((err, req, res, _next) => {
   console.error("Error no controlado:", err);
-  res
-    .status(500)
-    .json({ mensaje: "Error interno del servidor.", detalle: err.message });
+  const status = err.status || err.statusCode || 500;
+  const body = { mensaje: status === 400 ? "Solicitud inválida." : "Error interno del servidor." };
+  // El detalle solo se expone fuera de producción (evita filtrar información interna)
+  if (process.env.NODE_ENV !== "production" && !process.env.VERCEL) body.detalle = err.message;
+  res.status(status).json(body);
 });
 
 // ---------- Arranque local ----------
-// En Vercel, process.env.VERCEL === "1" → NO se llama listen().
-// Vercel envuelve la app exportada como serverless function.
-if (!process.env.VERCEL) {
+// Solo se llama listen() al ejecutar `node server.js` directamente.
+// En Vercel (y en los tests) la app se importa y se envuelve/usa sin listen().
+if (require.main === module) {
   const PORT = process.env.PORT || 3000;
   app.listen(PORT, () => {
     console.log("\n===============================================");
