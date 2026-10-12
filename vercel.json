@@ -6,6 +6,6 @@
   "outputDirectory": "frontend-techstore/dist",
   "rewrites": [
     { "source": "/productos", "destination": "/api" },
-    { "source": "/productos/:path*", "destination": "/api" }
+    { "source": "/productos/(.*)", "destination": "/api" }
   ]
 }
